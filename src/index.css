@@ -80,33 +80,44 @@ header img {
   position: relative;
   z-index: 10;
 }
+
+
 .trending {
   margin-top: 5rem;
   width: 100%;
-  overflow: hidden; /* Prevents horizontal scrolling */
+  overflow: hidden;
 }
 
 .trending ul {
   display: flex;
-  flex-wrap: wrap; /* Prevents horizontal overflow */
-  justify-content: space-between; /* Ensures items fit within the section */
-  gap: 1rem; /* Adjust spacing */
-  padding: 0 1rem; /* Adds balance */
-  max-width: 100%; /* Prevents overflow */
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+  max-width: 100%;
+  overflow-x: auto; /* ✅ Allows scrolling when needed */
+  white-space: nowrap; /* ✅ Prevents items from wrapping */
+  scrollbar-width: none; /* Hides scrollbar in Firefox */
+  -ms-overflow-style: none; /* Hides scrollbar in IE/Edge */
+}
+
+.trending ul::-webkit-scrollbar {
+  display: none; /* Hides scrollbar in Chrome/Safari */
 }
 
 .trending ul li {
   display: flex;
   align-items: center;
-  min-width: 230px;
+  flex: 0 0 auto;
+  min-width: 230px; /* ✅ Ensures items don’t shrink */
   gap: 10px;
 }
 
 .trending ul li p {
-  font-size: 150px;
+  font-size: 130px;
   font-family: "Bebas Neue", sans-serif;
   -webkit-text-stroke: 3px rgba(206, 206, 251, 0.5);
-  margin-left: 30px;
+  margin-left: -25px; /* Moves numbers closer to posters */
 }
 
 .trending ul li img {
@@ -114,8 +125,32 @@ header img {
   height: 163px;
   border-radius: 10px;
   object-fit: cover;
-  margin-left: auto;
 }
+
+/* ✅ Responsive Fix for Small Screens */
+@media (max-width: 768px) {
+  .trending ul {
+    overflow-x: auto; /* ✅ Enables horizontal scrolling */
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .trending ul li {
+    min-width: 180px; /* ✅ Keeps elements visible */
+  }
+
+  .trending ul li p {
+    font-size: 90px; /* ✅ Scales numbers down */
+    margin-left: -15px;
+  }
+
+  .trending ul li img {
+    width: 100px;
+    height: 130px;
+  }
+}
+
+
 
 .search {
   width: 100%;
